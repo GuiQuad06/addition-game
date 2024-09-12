@@ -6,16 +6,13 @@
 #include <QVector>
 #include <QDebug>
 
+#include "operand.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
 }
 QT_END_NAMESPACE
-
-typedef struct {
-    int dizaine;
-    int unite;
-} operand_t;
 
 class MainWindow : public QMainWindow
 {
@@ -32,7 +29,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    QVector<operand_t> *m_v_operand;
+    QVector<Operand> *m_v_operand;
     QVector<int> * m_operand;
 
 };
