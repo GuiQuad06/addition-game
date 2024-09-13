@@ -10,7 +10,7 @@ class Operand : public QObject
 public:
     explicit Operand(QObject *parent = nullptr);
 
-    int get_complete_value();
+    int get_complete_value() const;
     void generate_number();
     int get_dizaine() const;
     int get_unite() const;

@@ -1,10 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QDebug>
 #include <QMainWindow>
+#include <QMessageBox>
 #include <QRandomGenerator>
 #include <QVector>
-#include <QDebug>
 
 #include "operand.h"
 
@@ -25,6 +26,7 @@ public:
 private slots:
     void action_quitter();
     void generate_exo();
+    void test_result();
 
 private:
     Ui::MainWindow *ui;

@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(action_quitter()));
     connect(ui->pushButton_generateExo, SIGNAL(clicked()), this, SLOT(generate_exo()));
+    connect(ui->pushButton_submit, SIGNAL(clicked()), this, SLOT(test_result()));
 }
 
 MainWindow::~MainWindow()
@@ -32,4 +33,25 @@ void MainWindow::generate_exo()
     ui->label_unite_a->setText(QString::number(m_v_operand->at(0).get_unite()));
     ui->label_dizaine_b->setText(QString::number(m_v_operand->at(1).get_dizaine()));
     ui->label_unite_b->setText(QString::number(m_v_operand->at(1).get_unite()));
+}
+
+void MainWindow::test_result()
+{
+    QMessageBox msg;
+
+    int expected_result = m_v_operand->at(0).get_complete_value() + \
+                        m_v_operand->at(1).get_complete_value();
+
+    int result = (ui->lineEdit_dizaine_res->text() + ui->lineEdit_unite_res->text()).toInt();
+
+    if (result != expected_result) {
+        msg.setIcon(QMessageBox::Critical);
+        msg.setText("Oups... C'est pas gave Recommence :)");
+        msg.exec();
+    }
+    else {
+        msg.setIcon(QMessageBox::Information);
+        msg.setText("Bravo mon Enfant :)");
+        msg.exec();
+    }
 }

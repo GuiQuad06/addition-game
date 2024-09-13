@@ -6,7 +6,7 @@ Operand::Operand(QObject *parent)
     generate_number();
 }
 
-int Operand::get_complete_value()
+int Operand::get_complete_value() const
 {
     return (QString::number(m_dizaine) + QString::number(m_unite)).toInt();
 }
