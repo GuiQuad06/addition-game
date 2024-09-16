@@ -54,4 +54,7 @@ void MainWindow::test_result()
         msg.setText("Bravo mon Enfant :)");
         msg.exec();
     }
+
+    ui->lineEdit_dizaine_res->clear();
+    ui->lineEdit_unite_res->clear();
 }
