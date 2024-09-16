@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("S'amuser avec les addiions");
+    this->setWindowTitle("S'amuser avec les additions");
 
     connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(action_quitter()));
     connect(ui->pushButton_generateExo, SIGNAL(clicked()), this, SLOT(generate_exo()));
@@ -27,7 +27,7 @@ void MainWindow::action_quitter()
 void MainWindow::generate_exo()
 {
     m_v_operand = new QVector<Operand>(2);
-    m_operand = new QVector<int>(2);
+    m_operand = new QVector<uint>(2);
 
     ui->label_dizaine_a->setText(QString::number(m_v_operand->at(0).get_dizaine()));
     ui->label_unite_a->setText(QString::number(m_v_operand->at(0).get_unite()));
@@ -42,7 +42,7 @@ void MainWindow::test_result()
     int expected_result = m_v_operand->at(0).get_complete_value() + \
                         m_v_operand->at(1).get_complete_value();
 
-    int result = (ui->lineEdit_dizaine_res->text() + ui->lineEdit_unite_res->text()).toInt();
+    int result = (ui->lineEdit_dizaine_res->text() + ui->lineEdit_unite_res->text()).toUInt();
 
     if (result != expected_result) {
         msg.setIcon(QMessageBox::Critical);

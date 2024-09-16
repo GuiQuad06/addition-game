@@ -32,7 +32,7 @@ private:
     Ui::MainWindow *ui;
 
     QVector<Operand> *m_v_operand;
-    QVector<int> * m_operand;
+    QVector<uint> * m_operand;
 
 };
 #endif // MAINWINDOW_H

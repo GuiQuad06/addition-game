@@ -10,16 +10,17 @@ class Operand : public QObject
 public:
     explicit Operand(QObject *parent = nullptr);
 
-    int get_complete_value() const;
+    uint get_complete_value() const;
     void generate_number();
-    int get_dizaine() const;
-    int get_unite() const;
+    uint get_dizaine() const;
+    uint get_unite() const;
 
 signals:
 
 private:
-    int m_dizaine;
-    int m_unite;
+    uint m_value;
+    QChar m_dizaine;
+    QChar m_unite;
 };
 
 #endif // OPERAND_H
