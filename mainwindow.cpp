@@ -27,7 +27,6 @@ void MainWindow::action_quitter()
 void MainWindow::generate_exo()
 {
     m_v_operand = std::make_unique<QVector<Operand>>(2);
-    m_operand = std::make_unique<QVector<uint>>(2);
 
     ui->label_dizaine_a->setText(QString::number(m_v_operand->at(0).get_dizaine()));
     ui->label_unite_a->setText(QString::number(m_v_operand->at(0).get_unite()));

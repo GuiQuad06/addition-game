@@ -32,7 +32,6 @@ private:
     Ui::MainWindow *ui;
 
     std::unique_ptr<QVector<Operand>> m_v_operand;
-    std::unique_ptr<QVector<uint>> m_operand;
 
 };
 #endif // MAINWINDOW_H
