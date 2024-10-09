@@ -26,20 +26,20 @@ void MainWindow::action_quitter()
 
 void MainWindow::generate_exo()
 {
-    m_v_operand = std::make_unique<QVector<Operand>>(2);
+    m_v_operand = QVector<Operand>(2);
 
-    ui->label_dizaine_a->setText(QString::number(m_v_operand->at(0).get_dizaine()));
-    ui->label_unite_a->setText(QString::number(m_v_operand->at(0).get_unite()));
-    ui->label_dizaine_b->setText(QString::number(m_v_operand->at(1).get_dizaine()));
-    ui->label_unite_b->setText(QString::number(m_v_operand->at(1).get_unite()));
+    ui->label_dizaine_a->setText(QString::number(m_v_operand.at(0).get_dizaine()));
+    ui->label_unite_a->setText(QString::number(m_v_operand.at(0).get_unite()));
+    ui->label_dizaine_b->setText(QString::number(m_v_operand.at(1).get_dizaine()));
+    ui->label_unite_b->setText(QString::number(m_v_operand.at(1).get_unite()));
 }
 
 void MainWindow::test_result()
 {
     QMessageBox msg;
 
-    int expected_result = m_v_operand->at(0).get_complete_value() + \
-                        m_v_operand->at(1).get_complete_value();
+    int expected_result = m_v_operand.at(0).get_complete_value() + \
+                        m_v_operand.at(1).get_complete_value();
 
     int result = (ui->lineEdit_dizaine_res->text() + ui->lineEdit_unite_res->text()).toUInt();
 

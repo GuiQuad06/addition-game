@@ -31,7 +31,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    std::unique_ptr<QVector<Operand>> m_v_operand;
+    QVector<Operand> m_v_operand;
 
 };
 #endif // MAINWINDOW_H
