@@ -1,7 +1,6 @@
 #include "operand.h"
 
-Operand::Operand(QObject *parent)
-    : QObject{parent}, m_value(0), m_dizaine(0), m_unite(0)
+Operand::Operand(QObject *parent) : QObject{ parent }, m_value(0), m_dizaine(0), m_unite(0)
 {
     generate_number();
 }
@@ -20,14 +19,12 @@ void Operand::generate_number()
 
     if (len < 1 || len > 2) {
         return;
-    }
-    else if (len < 2) {
-        m_unite = QString::number(m_value).at(len-1);
+    } else if (len < 2) {
+        m_unite = QString::number(m_value).at(len - 1);
         m_dizaine = '0';
-    }
-    else {
-        m_unite = QString::number(m_value).at(len-1);
-        m_dizaine = QString::number(m_value).at(len-2);
+    } else {
+        m_unite = QString::number(m_value).at(len - 1);
+        m_dizaine = QString::number(m_value).at(len - 2);
     }
 }
 

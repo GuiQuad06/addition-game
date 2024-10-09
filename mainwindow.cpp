@@ -1,9 +1,11 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+#include <algorithm>
+
+#define NB_OF_OPERANDS 2
+
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
@@ -26,20 +28,30 @@ void MainWindow::action_quitter()
 
 void MainWindow::generate_exo()
 {
-    m_v_operand = QVector<Operand>(2);
+    m_v_operand.clear();
 
-    ui->label_dizaine_a->setText(QString::number(m_v_operand.at(0).get_dizaine()));
-    ui->label_unite_a->setText(QString::number(m_v_operand.at(0).get_unite()));
-    ui->label_dizaine_b->setText(QString::number(m_v_operand.at(1).get_dizaine()));
-    ui->label_unite_b->setText(QString::number(m_v_operand.at(1).get_unite()));
+    for (uint i = 0; i < NB_OF_OPERANDS; i++)
+        m_v_operand.push_back(std::make_unique<Operand>(this));
+
+    // Sort using a custom comparator (to avoid negative number with substractions)
+    std::sort(m_v_operand.begin(), m_v_operand.end(),
+              [](const std::unique_ptr<Operand> &a, const std::unique_ptr<Operand> &b) {
+                  return a->get_complete_value() > b->get_complete_value();
+              });
+
+    // Update UI with the generated Operand objects
+    ui->label_dizaine_a->setText(QString::number(m_v_operand.at(0)->get_dizaine()));
+    ui->label_unite_a->setText(QString::number(m_v_operand.at(0)->get_unite()));
+    ui->label_dizaine_b->setText(QString::number(m_v_operand.at(1)->get_dizaine()));
+    ui->label_unite_b->setText(QString::number(m_v_operand.at(1)->get_unite()));
 }
 
 void MainWindow::test_result()
 {
     QMessageBox msg;
 
-    int expected_result = m_v_operand.at(0).get_complete_value() + \
-                        m_v_operand.at(1).get_complete_value();
+    int expected_result =
+            m_v_operand.at(0)->get_complete_value() + m_v_operand.at(1)->get_complete_value();
 
     int result = (ui->lineEdit_dizaine_res->text() + ui->lineEdit_unite_res->text()).toUInt();
 
@@ -47,8 +59,7 @@ void MainWindow::test_result()
         msg.setIcon(QMessageBox::Critical);
         msg.setText("Oups... C'est pas gave Recommence :)");
         msg.exec();
-    }
-    else {
+    } else {
         msg.setIcon(QMessageBox::Information);
         msg.setText("Bravo mon Enfant :)");
         msg.exec();

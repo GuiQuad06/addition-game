@@ -5,7 +5,6 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QRandomGenerator>
-#include <QVector>
 
 #include "operand.h"
 
@@ -31,7 +30,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    QVector<Operand> m_v_operand;
-
+    std::vector<std::unique_ptr<Operand>> m_v_operand;
 };
 #endif // MAINWINDOW_H

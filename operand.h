@@ -9,6 +9,8 @@ class Operand : public QObject
     Q_OBJECT
 public:
     explicit Operand(QObject *parent = nullptr);
+    Operand(const Operand &other) = default; // Copy constructor
+    Operand &operator=(const Operand &other) = default; // Copy assignment operator
 
     uint get_complete_value() const;
     void generate_number();
