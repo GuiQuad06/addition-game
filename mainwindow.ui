@@ -24,7 +24,7 @@
        </font>
       </property>
       <property name="text">
-       <string>S'entrainer aux Additions en s'amusant</string>
+       <string>S'entrainer aux Maths en s'amusant</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -184,12 +184,30 @@
     </property>
     <addaction name="actionQuitter"/>
    </widget>
+   <widget class="QMenu" name="menuOperation">
+    <property name="title">
+     <string>Operation</string>
+    </property>
+    <addaction name="actionAddition"/>
+    <addaction name="actionSoustraction"/>
+   </widget>
    <addaction name="menuFichier"/>
+   <addaction name="menuOperation"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionQuitter">
    <property name="text">
     <string>Quitter</string>
+   </property>
+  </action>
+  <action name="actionAddition">
+   <property name="text">
+    <string>Addition</string>
+   </property>
+  </action>
+  <action name="actionSoustraction">
+   <property name="text">
+    <string>Soustraction</string>
    </property>
   </action>
  </widget>
