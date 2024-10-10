@@ -1,4 +1,6 @@
 #include "mainwindow.h"
+#include "addition.h"
+#include "substraction.h"
 #include "ui_mainwindow.h"
 
 #include <algorithm>
@@ -9,21 +11,41 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("S'amuser avec les additions");
+    this->setWindowTitle("S'amuser avec les Maths");
+
+    // Default state is Addition
+    m_ope = std::make_unique<Addition>();
 
     connect(ui->actionQuitter, SIGNAL(triggered()), this, SLOT(action_quitter()));
+    connect(ui->actionAddition, SIGNAL(triggered()), this, SLOT(action_add()));
+    connect(ui->actionSoustraction, SIGNAL(triggered()), this, SLOT(action_sub()));
     connect(ui->pushButton_generateExo, SIGNAL(clicked()), this, SLOT(generate_exo()));
     connect(ui->pushButton_submit, SIGNAL(clicked()), this, SLOT(test_result()));
 }
 
 MainWindow::~MainWindow()
 {
+    m_v_operand.clear();
     delete ui;
 }
 
 void MainWindow::action_quitter()
 {
     QCoreApplication::quit();
+}
+
+void MainWindow::action_add()
+{
+    ui->label_6->setText(QString('+'));
+
+    m_ope = std::make_unique<Addition>();
+}
+
+void MainWindow::action_sub()
+{
+    ui->label_6->setText(QString('-'));
+
+    m_ope = std::make_unique<Substraction>();
 }
 
 void MainWindow::generate_exo()
@@ -50,12 +72,17 @@ void MainWindow::test_result()
 {
     QMessageBox msg;
 
-    int expected_result =
-            m_v_operand.at(0)->get_complete_value() + m_v_operand.at(1)->get_complete_value();
+    if (m_ope) {
+        m_expected_result = m_ope->process(m_v_operand.at(0)->get_complete_value(),
+                                           m_v_operand.at(1)->get_complete_value());
+    } else {
+        qDebug() << "Operation Pointer is null...\n";
+        return;
+    }
 
-    int result = (ui->lineEdit_dizaine_res->text() + ui->lineEdit_unite_res->text()).toUInt();
+    m_result = (ui->lineEdit_dizaine_res->text() + ui->lineEdit_unite_res->text()).toUInt();
 
-    if (result != expected_result) {
+    if (m_result != m_expected_result) {
         msg.setIcon(QMessageBox::Critical);
         msg.setText("Oups... C'est pas gave Recommence :)");
         msg.exec();
